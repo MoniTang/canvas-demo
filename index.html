@@ -10,16 +10,33 @@
 </head>
 
 <body>
-    <div id="canvas"></div>
+    <!-- <div id="canvas"></div>
     <script>
         //画点
-        canvas.onclick = (e) => {
-            console.log(e.clientX)
-            console.log(e.clientY)
+        // canvas.onclick = (e) => {
+        //     let div = document.createElement('div')
+        //     div.style.position = 'absolute'
+                //获取鼠标的位置
+        //     div.style.left = e.clientX + 'px'
+        //     div.style.top = e.clientY + 'px'
+        //给元素添加样式
+        //     div.style.width = '6px'
+        //     div.style.height = '6px'
+        //     div.style.marginLeft = '-3px'
+        //     div.style.marginTop = '-3px'
+        //     div.style.borderRadius = '50%'
+        //     div.style.background = 'black'
+        //     canvas.appendChild(div)
+
+        // }
+        //画线
+        canvas.onmousemove = (e) => {
             let div = document.createElement('div')
             div.style.position = 'absolute'
+            //获取鼠标的位置
             div.style.left = e.clientX + 'px'
             div.style.top = e.clientY + 'px'
+            //给元素添加样式
             div.style.width = '6px'
             div.style.height = '6px'
             div.style.marginLeft = '-3px'
@@ -28,10 +45,48 @@
             div.style.background = 'black'
             canvas.appendChild(div)
 
+        }
+    </script> -->
+    <canvas id="canvas"></canvas>
+    <script>
+        let canvas = document.getElementById("canvas")
+        canvas.width = document.documentElement.clientWidth
+        canvas.height = document.documentElement.clientHeight
+        let ctx = canvas.getContext("2d");
+        //线条的颜色
+        ctx.fillStyle = "black";
+        ctx.strokeSttle = 'none'
+        //用canvas画线
+        let painting = false
+        canvas.onmousedown = () => {
+            painting = true
+        }
+
+
+        canvas.onmousemove = (e) => {
+            if (painting === true) {
+
+                // //绘制的形状是长方形分别是 x,y,长和高
+                // ctx.fillRect(e.clientX - 5, e.clientY - 5, 10, 10);
+                //绘制的形状是长方形分别是 x,y,半径，圆弧的起始点，结束点
+                ctx.beginPath();
+                ctx.arc(e.clientX, e.clientY, 10, 0, 2 * Math.PI);
+                ctx.stroke();
+                ctx.fill()
+
+            } else {
+                console.log('什么也不做')
+            }
+            canvas.onmouseup = () => {
+                painting = false
+            }
+
 
 
         }
+
     </script>
+
 
 </body>
 
